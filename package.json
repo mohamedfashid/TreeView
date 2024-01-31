@@ -6,7 +6,10 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "predeploy": "ng build --configuration production --base-href https://mohamedfashid.github.io/TreeView/",
+    "deploy": "gh-pages -d dist/supply-chain-cibp-champion",
+    "upload": "ng build --configuration production --base-href ./"
   },
   "private": true,
   "dependencies": {
