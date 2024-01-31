@@ -1,0 +1,77 @@
+@import "../../variable.scss";
+
+
+.parent{
+    position: relative;
+    &.deact {
+        // pointer-events: none !important;
+        &:hover{
+            .title{
+                background-color: orange;
+                color: #000;
+                border-radius: 5px;
+            }
+        }
+        .title{
+            background-color: orange;
+        }
+        
+    }
+}
+
+.parentName{
+    position: relative;
+    width: fit-content;
+    cursor: pointer;
+
+    .title{
+        padding: 5px 10px;
+        border-radius: 5px;
+    }
+
+    &:hover{
+        .title{
+            background-color: $primary;
+            color: #fff;
+            border-radius: 10px;
+        }
+    }
+
+    
+}
+.hoverBox{
+    background-color: #fff;
+    border: 1px solid #4c4c4c;
+    padding: 8px 0;
+    border-radius: 10px;
+    font-size: 16px !important;
+    position: absolute;
+    top: 37px;
+    left: 50px;
+    width: 150px;
+    z-index: 999;
+
+    .clickItem{
+        padding: 10px;
+        &:hover{
+            background-color: $secondary;
+            color: #fff;
+        }
+    }
+}
+
+.downarr {
+    cursor: pointer;
+    transform: rotate(-90deg);
+    transition: all 0.3s ease;
+    opacity: 0;
+
+    &.op1{
+        opacity: 1;
+    }
+
+    &.active {
+        transform: rotate(0deg);
+        transition: all 0.3s ease;
+    }
+}
