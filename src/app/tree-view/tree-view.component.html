@@ -1,48 +1,47 @@
-<!-- your-component.component.html -->
-
 <section class="container py-5">
-    <ng-container *ngTemplateOutlet="recursiveTree; context:{ $implicit: treeArr }"></ng-container>
-  
-    <ng-template #recursiveTree let-nodes let-parentNode="parentNode">  
-      <div *ngFor="let node of nodes" class="parent pe-4" [class.deact]="!node.isActive">
-        <!-- <p>{{ node.name }}</p> -->
-        <div class="flex facenter parentName py-1" (click)="toggle(node)"  (contextmenu)="onRightClick($event, node)" [hidden]="node.hide">
-          <div [class.op1]="node.children.length > 0" class="downarr" [class.active]="node.open">
-            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M24 24H0V0h24v24z" fill="none" opacity=".87"/><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6-1.41-1.41z"/></svg>
-          </div>
-          <div class="title">
-            <span *ngIf="!node.isEditing">{{ node.name }}</span>
-            <input *ngIf="node.isEditing" [(ngModel)]="node.name" (blur)="toggleEditState(node)" />
-          </div>
+  <ng-container *ngTemplateOutlet="recursiveTree; context:{ $implicit: treeArr }"></ng-container>
 
-          <div class="hoverBox" *ngIf="node.menu" (click)="closeMenu(node)" (mouseleave)="closeMenu(node)">
-            <div class="clickItem" (click)="openModal(parentNode)">Add Child</div>
-            <div class="clickItem" (click)="openModal(node)">Add Sub-Child</div>
-            <div>
-              <div class="clickItem" (click)="activate(node)" *ngIf="!node.isActive">Activate</div>
-              <div class="clickItem" (click)="deactivate(node)" *ngIf="node.isActive">Deactivate</div>
-            </div>
-            <!-- <button (click)="editNodeName(node)">Rename</button> -->
-            <div class="clickItem" (click)="editNodeName(node)" *ngIf="!node.isEditing">Rename</div>
-          </div>
+  <ng-template #recursiveTree let-nodes let-parentNode="parentNode">
+    <div *ngFor="let node of nodes" class="parent pe-4" [class.deact]="!node.isActive">
+      <!-- <p>{{ node.name }}</p> -->
+      <div class="flex facenter parentName py-1" (click)="toggle(node)" (contextmenu)="onRightClick($event, node)"
+        [hidden]="node.hide">
+        <div [class.op1]="node.children.length > 0" class="downarr" [class.active]="node.open">
+          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000">
+            <path d="M24 24H0V0h24v24z" fill="none" opacity=".87" />
+            <path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6-1.41-1.41z" />
+          </svg>
         </div>
-        
-        <div *ngIf="node.open"> 
-            <div class="ps-5">
-              <ng-container *ngTemplateOutlet="recursiveTree; context:{ $implicit: node.children, parentNode: node }"></ng-container>
-            </div>
+        <div class="title">
+          <span *ngIf="!node.isEditing">{{ node.name }}</span>
+          <input *ngIf="node.isEditing" [(ngModel)]="node.name" (blur)="toggleEditState(node)" />
+        </div>
+
+        <div class="hoverBox" *ngIf="node.menu" (click)="closeMenu(node)" (mouseleave)="closeMenu(node)">
+          <div class="clickItem" (click)="openModal(parentNode)">Add Child</div>
+          <div class="clickItem" (click)="openModal(node)">Add Sub-Child</div>
+          <div>
+            <div class="clickItem" (click)="activate(node)" *ngIf="!node.isActive">Activate</div>
+            <div class="clickItem" (click)="deactivate(node)" *ngIf="node.isActive">Deactivate</div>
+          </div>
+          <!-- <button (click)="editNodeName(node)">Rename</button> -->
+          <div class="clickItem" (click)="editNodeName(node)" *ngIf="!node.isEditing">Rename</div>
         </div>
       </div>
-    </ng-template>
-  
-    <!-- <button (click)="openModal()">Add Child</button> -->
-  
-    <div *ngIf="isAddChildModalOpen">
-      <app-modal
-      [newChildName]="newChildName"
-      (addChildEvent)="addChild(modalnode,$event)"
-      (closeModalEvent)="closeModal()"
-      ></app-modal>
+
+      <div *ngIf="node.open">
+        <div class="ps-5">
+          <ng-container
+            *ngTemplateOutlet="recursiveTree; context:{ $implicit: node.children, parentNode: node }"></ng-container>
+        </div>
+      </div>
     </div>
-  </section>
-  
+  </ng-template>
+
+  <!-- <button (click)="openModal()">Add Child</button> -->
+
+  <div *ngIf="isAddChildModalOpen">
+    <app-modal [newChildName]="newChildName" (addChildEvent)="addChild(modalnode,$event)"
+      (closeModalEvent)="closeModal()"></app-modal>
+  </div>
+</section>

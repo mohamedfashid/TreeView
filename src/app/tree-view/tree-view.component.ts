@@ -101,23 +101,16 @@ export class TreeViewComponent {
   isAddChildModalOpen: boolean = false;
   showContextMenu = false;
 
-  constructor() {} // Make sure to import NgbModal and provide it in your module
-  
+  constructor() {}
 
   onRightClick(event: MouseEvent, node: Tree): void {
-    event.preventDefault(); // Prevent the default browser context menu
+    event.preventDefault(); 
     if(!node.menu)
     {
       node.menu = true
     }
     console.log("target = " + node.menu);
     console.log(this.treeArr)
-
-    // You can also get the mouse coordinates if needed
-    // const mouseX = event.clientX;
-    // const mouseY = event.clientY;
-
-    // Perform any other actions you need on right-click
   }
 
   closeMenu(node: Tree): void {
